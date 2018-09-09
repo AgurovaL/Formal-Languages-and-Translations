@@ -1,0 +1,7 @@
+C:\Users\Lidia\source\repos\AutomatonProject\AutomatonProject\obj\Debug\AutomatonProject.csprojResolveAssemblyReference.cache
+C:\Users\Lidia\source\repos\AutomatonProject\AutomatonProject\obj\Debug\AutomatonProject.csproj.CoreCompileInputs.cache
+C:\Users\Lidia\source\repos\AutomatonProject\AutomatonProject\bin\Debug\AutomatonProject.exe.config
+C:\Users\Lidia\source\repos\AutomatonProject\AutomatonProject\bin\Debug\AutomatonProject.exe
+C:\Users\Lidia\source\repos\AutomatonProject\AutomatonProject\bin\Debug\AutomatonProject.pdb
+C:\Users\Lidia\source\repos\AutomatonProject\AutomatonProject\obj\Debug\AutomatonProject.exe
+C:\Users\Lidia\source\repos\AutomatonProject\AutomatonProject\obj\Debug\AutomatonProject.pdb
