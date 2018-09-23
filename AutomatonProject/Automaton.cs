@@ -7,13 +7,13 @@ namespace AutomatonProject
 {
     public class Automaton
     { 
-        private List<string> q;     //все возможные состояния (1,2,3,4,5,6,7,8,9)
-        private List<string> e;     //сигналы (a/b) 
-        private List<string> s;     //начальные состояния (1..9)
-        private List<string> f;     //конечные состояния  (1..9)
+        private List<string> q;     //все возможные состояния (1,2,3,4,5,6)
+        private List<string[]> e;     //сигналы (eE/0..9/./+-) 
+        private List<string> s;     //начальные состояния (1..6)
+        private List<string> f;     //конечные состояния  (1..6)
         private List< List<string[]> > delta; //переходы
 
-        private Automaton(List<string> qList, List<string> eList, List<string> sList,
+        private Automaton(List<string> qList, List<string[]> eList, List<string> sList,
                             List<string> fList, List<List<string[]>> deltaList)
         {
             this.Q = qList;
@@ -24,7 +24,7 @@ namespace AutomatonProject
         }
 
         public List<string> Q { get => q; set => q = value; }
-        public List<string> E { get => e; set => e = value; }      
+        public List<string[]> E { get => e; set => e = value; }      
         public List<string> S { get => s; set => s = value; }
         public List<string> F { get => f; set => f = value; }
         public List<List<string[]>> Delta { get => delta; set => delta = value; }
@@ -60,7 +60,14 @@ namespace AutomatonProject
                 }
             }
 
-            return new Automaton(argsList[0], argsList[1], argsList[2], argsList[3], deltaList);
+            //сигналы
+            List<string[]> eList = new List<string[]>();
+            for (int j = 0; j < argsList[1].Count; j++)
+            {
+                eList.Add(argsList[1][j].Split(','));
+
+            }
+            return new Automaton(argsList[0], eList, argsList[2], argsList[3], deltaList);
         }
 
         public void ShowAutomation()
@@ -69,12 +76,7 @@ namespace AutomatonProject
             {
                 Console.Write(str + ' ');
             }
-            Console.WriteLine();
-            foreach (string str in E)
-            {
-                Console.Write(str + ' ');
-            }
-            Console.WriteLine();
+            Console.WriteLine();           
             foreach (string str in S)
             {
                 Console.Write(str + ' ');
@@ -86,36 +88,41 @@ namespace AutomatonProject
             }
             Console.WriteLine();
 
-           //for (int i=0; i < Delta.Count; i++)
-           // {
-           //     for (int j=0; j < Delta[i].Count; j++)
-           //     {
-           //         for (int z = 0; z < Delta[i][j].Length; z++)
-           //         {
-           //             Console.Write(Delta[i][j][z] + ",");
-           //         }
-           //         Console.Write(" | ");
-           //     }
-           //     Console.WriteLine();
-           // }
+            for (int j = 0; j < E.Count; j++)
+            {
+                for (int z = 0; z <E[j].Length; z++)
+                {
+                    Console.Write(E[j][z] + ",");
+                }
+                Console.Write(" | ");
+            }
         }
 
         public List<string> Execute(List<string> s, char a)
         {
-            List<string> result = new List<string>();
-            int columnNumber = E.IndexOf(a.ToString()); //номер столбца в delta
+           List<string> result = new List<string>();
 
-            for (int i=0; i<s.Count; i++)
+           int columnNumber = -1;
+           for (int i = 0; i < E.Count; i++)
             {
-                int lineNumber = Int32.Parse(s[i])-1;         //номер строки в delta                               
+                if (E[i].Contains(a.ToString()))
+                {
+                    columnNumber = i;
+                }
+            }
+          // int columnNumber = E.IndexOf(a.ToString()); //номер столбца в delta
+
+            for (int i = 0; i < s.Count; i++)
+            {
+                int lineNumber = Q.IndexOf(s[i].ToString());         //номер строки в delta                               
                 string[] array = Delta[columnNumber][lineNumber];
-                
+
                 foreach (string str in array)
                 {
                     if (!result.Contains(str))
                     {
                         result.Add(str);
-                    }                        
+                    }
                 }
             }
             return result;

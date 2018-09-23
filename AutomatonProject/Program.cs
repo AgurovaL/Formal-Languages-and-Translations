@@ -10,15 +10,14 @@ namespace AutomatonProject
     {
         static void Main(string[] args)
         {
-            string s = "aababba";
-            int k = 0;
-            string inputFilePath = @"automationsInput\inputFirstTask.txt";
+            string str = "+1.23e+6";            
+            string inputFilePath = @"automationsInput\inputSecondTask.txt";
             Automaton automaton = Automaton.ReadAutomation(inputFilePath);
             automaton.ShowAutomation();
-            Console.WriteLine("------------------------");
 
-            MaxStringResult result = new MaxStringImpl().MaxString(automaton, s, k);
-            Console.WriteLine(result.Flag + " " + result.M);
+            new FloatNumbersFinder().Find(str, inputFilePath);
+            //MaxStringResult result = new MaxStringImpl().MaxString(automaton, s, k);
+            //Console.WriteLine(result.Flag + " " + result.M);
         }
     }
 }
