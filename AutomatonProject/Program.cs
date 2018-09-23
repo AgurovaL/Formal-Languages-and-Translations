@@ -11,8 +11,9 @@ namespace AutomatonProject
         static void Main(string[] args)
         {
             string s = "aababba";
-            int k = 1;
-            Automaton automaton = Automaton.ReadAutomation();
+            int k = 0;
+            string inputFilePath = @"automationsInput\inputFirstTask.txt";
+            Automaton automaton = Automaton.ReadAutomation(inputFilePath);
             automaton.ShowAutomation();
             Console.WriteLine("------------------------");
 

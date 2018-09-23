@@ -29,10 +29,10 @@ namespace AutomatonProject
         public List<string> F { get => f; set => f = value; }
         public List<List<string[]>> Delta { get => delta; set => delta = value; }
 
-        public static Automaton ReadAutomation()
+        public static Automaton ReadAutomation(string filePath)
         {
             List<List<string>> argsList = new List<List<string>>();
-            using (StreamReader reader = new StreamReader(@"automationsInput\input1.txt"))
+            using (StreamReader reader = new StreamReader(filePath))
             {
                 //считываем все строки в argsList
                 while (!reader.EndOfStream)
@@ -107,7 +107,7 @@ namespace AutomatonProject
 
             for (int i=0; i<s.Count; i++)
             {
-                int lineNumber = Int32.Parse(s[i]);         //номер строки в delta                               
+                int lineNumber = Int32.Parse(s[i])-1;         //номер строки в delta                               
                 string[] array = Delta[columnNumber][lineNumber];
                 
                 foreach (string str in array)

@@ -16,7 +16,7 @@ namespace AutomatonProject
             result.Flag = (automaton.S.Intersect(automaton.F).Count() > 0);           
             result.M = 0;
 
-            for (int i=k; i <= str.Length - 1; i++)
+            for (int i=k; i < str.Length; i++)
             {
                 s = automaton.Execute(s, str[i]);              
 
@@ -25,7 +25,7 @@ namespace AutomatonProject
                if (s.Intersect(automaton.F).Count() > 0)
                 {
                     result.Flag = true;
-                    result.M = i - k;
+                    result.M = i - k + 1;
                 }
             }
             return result;
